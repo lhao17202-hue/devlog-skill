@@ -28,16 +28,16 @@
 
 | 文件 | 修改次数 | 涉及会话 | 热度 |
 |------|---------|---------|------|
-| src/auth/login.ts | 1 | 0930 | — |
-| src/routes/auth.ts | 1 | 0930 | — |
-| src/middleware/auth.ts | 1 | 0930 | — |
-| .env.example | 1 | 0930 | — |
-| src/components/Nav.tsx | 1 | 1430 | — |
-| src/styles/nav.css | 1 | 1430 | — |
-| src/pages/Users.tsx | 1 | 1430 | — |
-| src/api/users.ts | 1 | 1430 | — |
-| src/db/connection.ts | 1 | 1630 | — |
-| .env | 1 | 1630 | — |
+| src/auth/login.ts | 1 | 0930 | - |
+| src/routes/auth.ts | 1 | 0930 | - |
+| src/middleware/auth.ts | 1 | 0930 | - |
+| .env.example | 1 | 0930 | - |
+| src/components/Nav.tsx | 1 | 1430 | - |
+| src/styles/nav.css | 1 | 1430 | - |
+| src/pages/Users.tsx | 1 | 1430 | - |
+| src/api/users.ts | 1 | 1430 | - |
+| src/db/connection.ts | 1 | 1630 | - |
+| .env | 1 | 1630 | - |
 
 > 本周无高频修改文件，代码变更较为分散。这在早期开发阶段是正常的。
 

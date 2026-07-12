@@ -2,7 +2,7 @@
 
 <p align="center">
   <b>AI 编程项目智能复盘助手</b><br>
-  无缝记录 · 自动提炼 · 一键生成日报/周报/迭代方案
+  无缝记录 &middot; 自动提炼 &middot; 一键生成日报 / 周报 / 迭代方案
 </p>
 
 <p align="center">
@@ -17,10 +17,10 @@
 
 DevLog 是一套轻量级 Python 工具，专为 **AI 辅助编程场景** 设计。它能：
 
-- 📝 **无缝记录**每次 AI 编程会话的关键信息（目标、任务、错误、决策、文件变更）
-- 📊 **自动提炼**进度趋势、卡点分布、高频错误模式
-- 📋 **一键生成**日报 / 周报 / 迭代方案（Markdown + JSON 双格式）
-- 🔄 **闭环改进**将复盘发现映射到具体迭代任务，确保问题被跟踪
+- **无缝记录** 每次 AI 编程会话的关键信息（目标、任务、错误、决策、文件变更）
+- **自动提炼** 进度趋势、卡点分布、高频错误模式
+- **一键生成** 日报 / 周报 / 迭代方案（Markdown + JSON 双格式）
+- **闭环改进** 将复盘发现映射到具体迭代任务，确保问题被跟踪
 
 > 如果你每天用 AI 写代码但不知道"这一周到底干了什么"、"项目卡在哪里"、"下一步该做什么"——DevLog 就是为你准备的。
 
@@ -54,7 +54,7 @@ python scripts/generate_report.py --project-dir ~/my-project --type daily
 
 ## 核心功能
 
-### 📝 会话日志记录
+### 会话日志记录
 
 每次 AI 编程会话结束后，用一条命令记录关键信息：
 
@@ -70,33 +70,34 @@ python scripts/log_session.py --project-dir . \
   --mood productive
 ```
 
-### 📊 智能报告生成
+### 智能报告生成
 
-**日报** — 今日概览 + 完成事项 + 卡点 + 明日计划（基于数据自动生成）
+**日报** — 今日概览 + 完成事项 + 卡点 + 明日计划（基于历史数据自动生成建议）
 
 ```bash
 python scripts/generate_report.py --project-dir . --type daily --date 2026-07-12
 ```
 
-**周报** — 进度趋势 + 错误分类 + 文件热点 + 迭代建议
+**周报** — 进度趋势 + 错误分类统计 + 文件热点分析 + 迭代建议
 
 ```bash
 python scripts/generate_report.py --project-dir . --type weekly
 ```
 
-**迭代方案** ⭐ — 最有价值的输出：
-- 🔍 问题根因分析（按错误分类定位）
-- ⏱️ 任务工时估算（智能推断）
-- 📅 按天排期（~3h/天有效编码时间）
-- 🎯 风险矩阵（概率 × 影响 × 应对）
-- ✅ 成功标准（量化判断）
-- 🔄 改进闭环（复盘发现 → 措施 → 任务）
+**迭代方案** — 最有价值的输出，将复盘转化为可执行的行动计划：
+
+- 问题根因分析（按错误分类定位根因，附改进方向）
+- 任务工时估算（基于关键词智能推断，如 API 类 1.5h、UI 类 2.0h）
+- 按天排期建议（假设每天约 3h 有效编码时间）
+- 风险矩阵（概率 x 影响 x 应对措施）
+- 成功标准（量化的完成判断条件）
+- 改进措施闭环（复盘发现 -> 改进措施 -> 对应任务编号）
 
 ```bash
 python scripts/generate_report.py --project-dir . --type iteration --label "sprint-2"
 ```
 
-### 📁 数据存储
+### 数据存储
 
 所有数据存储在项目根目录的 `.devlog/` 下（建议加入 `.gitignore`）：
 
@@ -115,10 +116,10 @@ python scripts/generate_report.py --project-dir . --type iteration --label "spri
 
 ## 报告效果预览
 
-### 日报示例
+### 日报
 
 ```markdown
-# 项目日报 — 2026年07月12日
+# 项目日报 -- 2026年07月12日
 
 ## 今日概览
 | 指标 | 数值 |
@@ -139,10 +140,10 @@ python scripts/generate_report.py --project-dir . --type iteration --label "spri
 3. 质量改进：关注 config 类错误（近期出现3次）
 ```
 
-### 迭代方案预览
+### 迭代方案
 
 ```markdown
-# 迭代方案 — sprint-2
+# 迭代方案 -- sprint-2
 
 ## 复盘数据
 | 指标 | 数值 |
@@ -157,7 +158,7 @@ python scripts/generate_report.py --project-dir . --type iteration --label "spri
 | P2 | 质量 | 解决 config 类错误 | 1.0h | 无 |
 | P3 | 待完成 | 前端登录页面 | 2.0h | JWT已就绪 |
 
-**核心工时**: 10.5h
+核心工时: 10.5h
 
 ## 风险矩阵
 | 风险 | 概率 | 影响 | 应对措施 |
@@ -173,10 +174,10 @@ DevLog 的脚本独立于任何特定的 AI 编程工具。你可以：
 
 | 集成方式 | 说明 |
 |---------|------|
-| **手动** | 每次会话后运行 `log_session.py` |
-| **Git Hook** | 在 `post-commit` 中记录变更 |
-| **AI Tool Hook** | 配置 AI 工具的 post-session hook |
-| **Cron / 定时** | 每天 18:00 自动生成日报 |
+| 手动 | 每次会话后运行 `log_session.py` |
+| Git Hook | 在 `post-commit` 中记录变更 |
+| AI Tool Hook | 配置 AI 工具的 post-session hook |
+| Cron / 定时 | 每天 18:00 自动生成日报 |
 
 ## 项目结构
 
@@ -188,7 +189,7 @@ devlog-skill/
 ├── scripts/
 │   ├── setup.py               # 项目初始化
 │   ├── log_session.py         # 会话记录
-│   └── generate_report.py     # 报告生成
+│   └── generate_report.py     # 报告生成（日报/周报/迭代方案）
 ├── templates/                 # 报告模板参考
 ├── references/                # 数据 Schema 文档
 └── examples/                  # 示例输出
@@ -196,10 +197,10 @@ devlog-skill/
 
 ## 适用场景
 
-- ✅ 个人开发者用 AI 辅助编程，需要追踪进度
-- ✅ 小团队没有专职 PM，需要自动化进度管理
-- ✅ 开源项目维护者需要记录开发日志
-- ✅ 自由职业者需要向客户提供工作日报
+- 个人开发者用 AI 辅助编程，需要追踪进度
+- 小团队没有专职 PM，需要自动化进度管理
+- 开源项目维护者需要记录开发日志
+- 自由职业者需要向客户提供工作日报
 
 ## 贡献
 
@@ -207,4 +208,4 @@ devlog-skill/
 
 ## 许可证
 
-MIT © [lhao17202-hue](https://github.com/lhao17202-hue)
+MIT (c) [lhao17202-hue](https://github.com/lhao17202-hue)

@@ -52,8 +52,7 @@ def load_index(progress_dir: Path) -> dict:
 
 # ── Daily Report ──────────────────────────────────────────────
 
-def generate_daily_report(sessions: list[dict], report_date: date,
-                          index: dict) -> str:
+def generate_daily_report(sessions: list[dict], report_date: date) -> str:
     """Generate a daily report in Markdown."""
     total_tasks = sum(len(s.get("tasks_completed", [])) for s in sessions)
     total_duration = sum(s.get("duration_minutes", 0) for s in sessions)
@@ -112,8 +111,8 @@ def generate_daily_report(sessions: list[dict], report_date: date,
         L.append("")
         for b in all_blockers:
             sev = b.get("severity", "major")
-            emoji = {"critical": "RED", "major": "YELLOW", "minor": "GREEN"}.get(sev, "YELLOW")
-            L.append(f"- [{emoji}] {b['description']}")
+            label = {"critical": "[!!]", "major": "[!]", "minor": "[-]"}.get(sev, "[!]")
+            L.append(f"- {label} {b['description']}")
         L.append("")
 
     if all_errors:
@@ -164,8 +163,7 @@ def generate_daily_report(sessions: list[dict], report_date: date,
 
 # ── Weekly Report ─────────────────────────────────────────────
 
-def generate_weekly_report(sessions: list[dict], week_start: date,
-                           index: dict) -> str:
+def generate_weekly_report(sessions: list[dict], week_start: date) -> str:
     """Generate a weekly report in Markdown."""
     week_end = week_start + timedelta(days=6)
     total_tasks = sum(len(s.get("tasks_completed", [])) for s in sessions)
@@ -253,11 +251,11 @@ def generate_weekly_report(sessions: list[dict], week_start: date,
             session_str = ", ".join(session_ids)
             # Hot indicator: 3+ changes = HOT, 2 = WARM, 1 = normal
             if count >= 3:
-                hot = "🔥 高"
+                hot = "[HIGH]"
             elif count >= 2:
-                hot = "⚠️ 中"
+                hot = "[MED]"
             else:
-                hot = "—"
+                hot = "-"
             L.append(f"| {f} | {count} | {session_str} | {hot} |")
         L.append("")
 
@@ -638,7 +636,7 @@ def main():
     args = parser.parse_args()
 
     project_dir = Path(args.project_dir).resolve()
-    progress_dir = project_dir / ".claude" / "progress"
+    progress_dir = project_dir / ".devlog"
     reports_dir = progress_dir / "reports"
     index = load_index(progress_dir)
 
@@ -646,7 +644,7 @@ def main():
         report_date = (datetime.strptime(args.date, "%Y-%m-%d").date()
                        if args.date else date.today())
         sessions = load_sessions(progress_dir, report_date, report_date)
-        report = generate_daily_report(sessions, report_date, index)
+        report = generate_daily_report(sessions, report_date)
         out_dir = reports_dir / "daily"
         out_file = out_dir / f"daily_{report_date.strftime('%Y%m%d')}.md"
 
@@ -657,7 +655,7 @@ def main():
             week_start = date.today() - timedelta(days=date.today().weekday())
         week_end = week_start + timedelta(days=6)
         sessions = load_sessions(progress_dir, week_start, week_end)
-        report = generate_weekly_report(sessions, week_start, index)
+        report = generate_weekly_report(sessions, week_start)
         out_dir = reports_dir / "weekly"
         out_file = out_dir / f"weekly_{week_start.strftime('%Y%m%d')}.md"
 

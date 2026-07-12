@@ -134,7 +134,7 @@ def main():
     args = parser.parse_args()
 
     project_dir = Path(args.project_dir).resolve()
-    progress_dir = project_dir / ".claude" / "progress"
+    progress_dir = project_dir / ".devlog"
 
     # Ensure directories exist
     today = datetime.now().strftime("%Y-%m-%d")
