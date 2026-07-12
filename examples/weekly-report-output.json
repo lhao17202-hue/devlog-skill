@@ -1,0 +1,7 @@
+{
+  "type": "weekly",
+  "generated_at": "2026-07-12T12:00:19.926290",
+  "project": "mock-project",
+  "sessions_count": 3,
+  "markdown_report": "examples\\weekly-report-output.md"
+}

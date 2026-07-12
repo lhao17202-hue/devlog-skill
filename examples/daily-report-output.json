@@ -1,0 +1,7 @@
+{
+  "type": "daily",
+  "generated_at": "2026-07-12T12:00:19.769880",
+  "project": "mock-project",
+  "sessions_count": 0,
+  "markdown_report": "examples\\daily-report-output.md"
+}
