@@ -33,7 +33,7 @@ def load_sessions(progress_dir: Path, since: date, until: date) -> list[dict]:
         except ValueError:
             continue
         if since <= dir_date <= until:
-            for session_file in sorted(date_dir.glob("s_*.json")):
+            for session_file in sorted(date_dir.glob("*.json")):
                 try:
                     sessions.append(json.loads(
                         session_file.read_text(encoding="utf-8")))
